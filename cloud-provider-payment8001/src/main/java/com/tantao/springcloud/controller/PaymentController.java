@@ -58,9 +58,12 @@ public class PaymentController {
             log.info(instance.getInstanceId() + "\t" + instance.getHost() + "\t"
             + instance.getPort() + "\t" + instance.getUri());
         }
-
         return this.discoveryClient;
     }
 
+    @GetMapping("/payment/port")
+    public String getPort() {
+        return serverPort;
+    }
 
 }
