@@ -15,10 +15,11 @@ public class HystrixServiceImp implements HystrixService {
     @Override
     public String paymentInfo_TimeOut(Integer id) {
         try {
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+//        int i =  10 / 0;
         return "线程池:" + Thread.currentThread().getName() + ",paymentInfo_TimeOut,id:" + id;
     }
 }
