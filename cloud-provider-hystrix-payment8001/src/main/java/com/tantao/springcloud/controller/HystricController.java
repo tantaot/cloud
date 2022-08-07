@@ -34,4 +34,11 @@ public class HystricController {
         return "8001出现异常，请稍后重试";
     }
 
+    @GetMapping("/payment/hystrix/circuitbread/{id}")
+    public String paymentInfo_CircuitBreaker(@PathVariable("id")Integer id) {
+        String result = hystrixService.paymentInfo_CircuitBreaker(id);
+        log.info("============result" + result);
+        return result;
+    }
+
 }

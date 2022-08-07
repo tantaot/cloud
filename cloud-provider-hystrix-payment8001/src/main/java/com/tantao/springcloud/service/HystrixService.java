@@ -6,4 +6,6 @@ public interface HystrixService {
 
     public String paymentInfo_TimeOut(Integer id);
 
+    public String paymentInfo_CircuitBreaker(Integer id);
+
 }
