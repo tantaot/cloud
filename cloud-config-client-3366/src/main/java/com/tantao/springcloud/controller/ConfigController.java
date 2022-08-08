@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RefreshScope
-public class OtherController {
+public class ConfigController {
 
-    @Value("${config.other}")
+    @Value("${config.test}")
     private String config;
 
-    @GetMapping("/other")
+    @GetMapping("/config")
     public String getConfig(){
         return config;
     }
