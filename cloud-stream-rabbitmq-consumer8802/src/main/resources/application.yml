@@ -1,0 +1,50 @@
+server:
+  port: 8802
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+  instance:
+    instance-id: consumer-8802.com
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 60
+    prefer-ip-address: true
+
+spring:
+  application:
+    name: cloud-stream-consumer-service
+  rabbitmq:
+    host: 192.168.233.128
+    username: admin
+    password: admin
+  cloud:
+    stream:
+      binders: #绑定器,配置要绑定的rabbitmq服务信息
+        demo-binder: #表示定义的名称，用于binding整合
+          type: rabbit #rabbitmq  消息组件类型
+          environment: #配置rabbitmq环境
+            spring:
+              rabbitmq:
+                host: 192.168.233.128
+                username: admin
+                password: admin
+                port: 5672
+      bindings: #服务整合处理
+        input: #消息输出通道
+          destination: demo-exchange #交换机
+          content-type: application/json # 设置消息类型，使用json，文本数据使用"text/plain"
+          binder: demo-binder  #设置要绑定的消息服务的具体 设置
+          group: tantaoA
+        input-demo:
+          destination: stream-exchange #交换机
+          content-type: application/json # 设置消息类型，使用json，文本数据使用"text/plain"
+          binder: demo-binder  #设置要绑定的消息服务的具体 设置
+          group: tantaoB
+      rabbit:
+        bindings:
+          input-demo: # channel 消息输入通道
+            producer: # 生产者
+              routing-key-expression: '''demoRoutingKey'''
+
+
